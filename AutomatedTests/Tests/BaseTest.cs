@@ -28,21 +28,21 @@ namespace AutomatedTests.Tests
         }
 
         [TearDown]
-        public void TearDown(ITestResult result)
+        public void TearDown()
         {
-            if (result.ResultState.Status == ResultState.Failure.Status)
+            if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
             {
-                LogErrorAndTakeScreenshot("Test fails with reason: " + TestContext.CurrentContext.Result, result);
+                LogErrorAndTakeScreenshot("Test fails with reason: " + TestContext.CurrentContext.Result, TestContext.CurrentContext);
             }
         }
 
-        private void LogErrorAndTakeScreenshot(String message, ITestResult result)
+        private void LogErrorAndTakeScreenshot(String message, TestContext result)
         {
             CustomLog.ErrorWithScreenshot(message, _driver, result.Test.MethodName);
         }
 
         [OneTimeTearDown]
-        public void TearDown()
+        public void OneTimeTearDown()
         {
             CustomLog.Info("Test end time: " + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
             CustomLog.Debug("--------------------------------------------------------------------------------------------------------------------------------------------------------------------");
