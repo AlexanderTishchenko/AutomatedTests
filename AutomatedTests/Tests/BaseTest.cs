@@ -8,7 +8,7 @@ namespace AutomatedTests.Tests
     {
         private BrowserDriver _driver;
 
-        BrowserDriver GetBrowser()
+        protected BrowserDriver GetBrowser()
         {
             if (_driver != null)
             {

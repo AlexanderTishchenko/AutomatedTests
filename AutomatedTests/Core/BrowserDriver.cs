@@ -1,19 +1,20 @@
 ﻿using AutomatedTests.Utilities;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using System.Collections.Generic;
 
 namespace AutomatedTests.Core
 {
     internal class BrowserDriver
     {
-        private static WebDriver _webDriver;
+        private static IWebDriver _webDriver;
         private ConfigReader _config;
         public BrowserDriver()
         {
             _config = new ConfigReader();
         }
 
-        public WebDriver GetWebDriver()
+        public IWebDriver GetWebDriver()
         {
             if (IsBrowserOpened())
             {
@@ -25,6 +26,12 @@ namespace AutomatedTests.Core
                 return _webDriver;
             }
         }
+
+        public void Open(string uri)
+        {
+            GetWebDriver().Navigate().GoToUrl(uri);
+        }
+
         public ConfigReader GetConfig()
         {
             return _config;
@@ -45,7 +52,7 @@ namespace AutomatedTests.Core
             ChromeOptions options = new ChromeOptions();
             //options.SetExperimentalOption("prefs", chromePrefs);
             _webDriver = new ChromeDriver(options);
-
+            _webDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10);
 
             _webDriver.Manage().Window.Maximize();
             _webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
@@ -77,6 +84,24 @@ namespace AutomatedTests.Core
         public void DeleteAllCookies()
         {
             GetWebDriver().Manage().Cookies.DeleteAllCookies();
+        }
+
+        public IWebElement FindElement(By by)
+        {
+            return GetWebDriver().FindElement(by);
+        }
+
+        public void SwitchToNewWindow()
+        {
+            string parentWindow = GetWebDriver().CurrentWindowHandle;
+            var windowHandles = GetWebDriver().WindowHandles;
+            foreach (string windowHandle in windowHandles)
+            {
+                if (!windowHandle.Equals(parentWindow))
+                {
+                    GetWebDriver().SwitchTo().Window(windowHandle);
+                }
+            }
         }
     }
 }

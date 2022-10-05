@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutomatedTests.Pages;
+using AutomatedTests.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +19,11 @@ namespace AutomatedTests.Tests
         [Test]
         public void Test1()
         {
-            Assert.Pass();
+            string expectedHeader = "Better Experiences Start Here";
+
+            MainPage homePage = PageOpening.Open<MainPage>(GetBrowser());
+            var requestADemoPage = homePage.OpenRequestADemoPage();
+            Assert.That(requestADemoPage.GetHeaderText, Is.EqualTo(expectedHeader), "Header is not equal to expected");
         }
     }
 }
