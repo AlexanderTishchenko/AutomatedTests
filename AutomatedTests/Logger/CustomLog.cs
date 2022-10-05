@@ -7,29 +7,29 @@ namespace AutomatedTests.Logger
 {
     internal class CustomLog
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(Program));
+        private static readonly ILog _log = LogManager.GetLogger(typeof(Program));
 
-        public static void step(int step, String text)
+        public static void Step(int step, string text)
         {
-            log.Info($"Step {step}: {text}");
+            _log.Info($"Step {step}: {text}");
         }
 
-        public static void Info(String text)
+        public static void Info(string text)
         {
-            log.Info(text);
+            _log.Info(text);
         }
 
-        public static void error(String text)
+        public static void Error(string text)
         {
-            log.Error(text);
+            _log.Error(text);
         }
 
-        public static void Debug(String text)
+        public static void Debug(string text)
         {
-            log.Debug(text);
+            _log.Debug(text);
         }
 
-        public static void ErrorWithScreenshot(String text, BrowserDriver driver, String screenshotName)
+        public static void ErrorWithScreenshot(string text, BrowserDriver driver, String screenshotName)
         {
             var path = CaptureScreenshot(screenshotName, driver);
             int index = text.IndexOf("(Session info");
@@ -41,19 +41,19 @@ namespace AutomatedTests.Logger
                     index = text.Length;
                 }
             }
-            error(text.Substring(0, index));
+            Error(text.Substring(0, index));
             if (path != null)
             {
                 Info("Screenshot: " + path);
             }
         }
 
-        public static void error(String text, Exception e)
+        public static void Error(string text, Exception e)
         {
-            log.Error(text, e);
+            _log.Error(text, e);
         }
 
-        private static string CaptureScreenshot(String name, BrowserDriver driver)
+        private static string CaptureScreenshot(string name, BrowserDriver driver)
         {
             Screenshot screenshot = ((ITakesScreenshot)driver.GetWebDriver()).GetScreenshot();
             var folderPath = Path.Combine("target", "screenshots", DateTime.Now.ToString("dd.MM.yyyy"));
