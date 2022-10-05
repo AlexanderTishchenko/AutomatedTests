@@ -2,6 +2,7 @@
 using log4net;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
 using OpenQA.Selenium;
+using System.IO;
 
 namespace AutomatedTests.Logger
 {
@@ -32,16 +33,7 @@ namespace AutomatedTests.Logger
         public static void ErrorWithScreenshot(string text, BrowserDriver driver, String screenshotName)
         {
             var path = CaptureScreenshot(screenshotName, driver);
-            int index = text.IndexOf("(Session info");
-            if (index == -1)
-            {
-                index = text.IndexOf("Build info");
-                if (index == -1)
-                {
-                    index = text.Length;
-                }
-            }
-            Error(text.Substring(0, index));
+            Error(text);
             if (path != null)
             {
                 Info("Screenshot: " + path);
@@ -59,7 +51,10 @@ namespace AutomatedTests.Logger
             var folderPath = Path.Combine("target", "screenshots", DateTime.Now.ToString("dd.MM.yyyy"));
             var screenshotName = $"{name} {DateTime.Now.ToString("HH-mm-ss")}.png";
             var fullPath = Path.Combine(folderPath, screenshotName);
-
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
             screenshot.SaveAsFile(fullPath);
             return fullPath;
 

@@ -32,7 +32,7 @@ namespace AutomatedTests.Tests
         {
             if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
             {
-                LogErrorAndTakeScreenshot("Test fails with reason: " + TestContext.CurrentContext.Result, TestContext.CurrentContext);
+                LogErrorAndTakeScreenshot("Test fails with reason: " + TestContext.CurrentContext.Result.Message, TestContext.CurrentContext);
             }
         }
 

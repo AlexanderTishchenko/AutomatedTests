@@ -3,6 +3,7 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium;
 using AutomatedTests.Pages;
 using AutomatedTests.Models.Interfaces;
+using System.Xml.Linq;
 
 namespace AutomatedTests.Elements
 {
@@ -41,7 +42,7 @@ namespace AutomatedTests.Elements
 
         public void Click()
         {
-            GetWrappedElement().Click();
+            Browser.ExecuteScript("arguments[0].click();", GetWrappedElement());
         }
 
         public void Hover()

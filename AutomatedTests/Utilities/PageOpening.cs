@@ -47,7 +47,7 @@ namespace AutomatedTests.Utilities
             {
                 driver.SwitchToNewWindow();
             }
-            Wait.waitForPageLoad(driver);
+            Wait.WaitForPageLoad(driver);
             Uri pageUrl = driver.GetUri();
             Type type = typeof(T);
             return (IPage)Activator.CreateInstance(typeof(T), new object[] { driver, pageUrl });

@@ -76,7 +76,7 @@ namespace AutomatedTests.Core
             return ((IJavaScriptExecutor)_webDriver).ExecuteScript(script);
         }
 
-        public object ExecuteScript(string script, object[] parameters)
+        public object ExecuteScript(string script, params object[] parameters)
         {
             return ((IJavaScriptExecutor)_webDriver).ExecuteScript(script, parameters);
         }
