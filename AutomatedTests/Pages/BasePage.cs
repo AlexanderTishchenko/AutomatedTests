@@ -1,10 +1,5 @@
 ﻿using AutomatedTests.Core;
-using AutomatedTests.Utilities;
 using OpenQA.Selenium;
-using NUnit.Framework;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.PageObjects;
 using AutomatedTests.Models.Interfaces;
 
 namespace AutomatedTests.Pages
