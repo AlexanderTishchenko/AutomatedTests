@@ -23,6 +23,7 @@ namespace AutomatedTests.Tests
             var contentOfAPage = homePage.GetContentText();
             contentOfAPage = contentOfAPage.Replace("\r", string.Empty);
 
+
             var commentsEndPoint = new CommentsEndPoint(_client);
             var commentsByApi = await commentsEndPoint.GetCommentsAsync();
 
