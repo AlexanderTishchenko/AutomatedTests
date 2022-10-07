@@ -50,6 +50,7 @@ namespace AutomatedTests.Core
             }
 
             ChromeOptions options = new ChromeOptions();
+            options.AddArguments(new List<string>() { "headless", "disable-gpu" });
             //options.SetExperimentalOption("prefs", chromePrefs);
             _webDriver = new ChromeDriver(options);
             _webDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10);
