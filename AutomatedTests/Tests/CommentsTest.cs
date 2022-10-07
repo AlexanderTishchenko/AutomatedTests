@@ -1,14 +1,8 @@
 ﻿using AutomatedTests.Api.Client;
 using AutomatedTests.Api.EndPoints;
 using AutomatedTests.Logger;
-using AutomatedTests.Models.Attributes;
 using AutomatedTests.Pages;
 using AutomatedTests.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutomatedTests.Tests
 {
