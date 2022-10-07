@@ -12,7 +12,7 @@ namespace AutomatedTests.Tests
         [OneTimeSetUp]
         public void SetUp()
         {
-            _client = new Client(); 
+            _client = new Client();
         }
 
         [Test]
